@@ -1,0 +1,153 @@
+.textt{
+    color:red;
+}
+table{
+    border:2px solid red;
+}
+td{
+    border:2px solid red;
+}
+th{
+    border:2px solid red; 
+}
+#a1{
+    color:orange ;
+}
+#a1:visited{
+    color:blue;
+}
+#a1:hover{
+    color:green;
+}
+#firstArticle:target{
+    border:2px solid blue;
+}
+#secondArticle:target{
+    border:2px solid yellow;
+}
+.blockEx{
+    border-width: 5px;
+    border-radius: 5%;
+    border-color: yellow;
+    border-style: solid;
+    margin-bottom: 10px;
+    padding:10px 10px 10px 10px;
+    height:20vh;
+    width:20vw;
+}
+.inlineEx{
+    border-width: 5px;
+    border-radius: 5%;
+    border-color:red;
+    border-style:double;
+    padding:10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+    height:20vh;
+    width:20vw;
+    display: inline-block;
+
+}
+#parentToPosition{
+    position: static;
+}
+#positionExample1{
+    position: static;
+}
+#positionExample2{
+    position: relative;
+    top:25px;
+    left:50px;
+
+}
+ #positionExample3{
+    position: absolute;
+    top:25px;
+    /* bottom:10px; */
+}
+#positionExample4{
+    position: fixed;
+    top:100px;
+
+}
+#positionExample5{
+    position: sticky;
+}
+#float1{
+    float: right;
+    height:20px;
+    width:20px;
+    background: red;
+    border:2px solid black;
+}
+#float2{
+    float: right;
+    height:20px;
+    width:20px;
+    background: green;
+    border:2px solid black;
+}
+#float3{
+    float: right;
+    height:20px;
+    width:20px;
+    background: yellow;
+    border:2px solid black;
+}
+#lastElement{
+    clear: both;
+}
+#transitionExample{
+    height:20px;
+    width:20px;
+    background: blue;
+    transition: width 2s,background 5s;
+    transition-delay: 2s;
+
+
+}
+#transitionExample:hover{
+    width:40px;
+    background: red;
+}
+#parentToTranslate{
+    background: pink;
+    width:250px;
+    height:250px;
+
+}
+#translationonExample{
+background: greenyellow;
+width:50px;
+height:50px;
+transition: transform 2s;
+animation: go-around 5s ease; 
+}
+#parentToTranslate:hover #translationonExample{
+    /* transform: translateX(100%) translateY(100%); */
+   /* animation: go-around 5s ease; */
+   animation-play-state: paused;
+}
+@keyframes go-around {
+    20%{
+        transform: translateY(500%);
+    }
+    40%{
+        transform: translateX(100%) translateY(500%);
+    }
+    60%{
+        /* transform: translateX(0%) translateX(0%); */
+        transform: translateX(150%) translateY(250%);
+    }
+    80%{
+        transform: translateX(500%) translateY(500%);
+
+    }
+    90%{
+        transform: translateX(0%) translateY(300%);
+
+    }
+    100%{
+        transform: translateX(500%) translateY(0%);
+    }
+    
+}

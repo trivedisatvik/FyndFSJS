@@ -1,0 +1,28 @@
+#navbarParent{
+display: flex;
+background: cyan;
+align-items: center;
+}
+#navItemsParent{
+    display: flex;
+    background: greenyellow;
+    flex-grow: 1;
+}
+#logo{
+    height: 30px;
+}
+#deadSpace{
+    flex-grow: 1;
+}
+.navChild{
+    flex-grow: 1;
+}
+#CTA{
+    padding: 3px;
+}
+#CTAButton{
+    color: white;
+    background: black;
+    border-radius: 25%;
+    border: solid 2px red;
+}
