@@ -5,6 +5,7 @@ align-items: center;
 }
 #navItemsParent{
     display: flex;
+    
     background: greenyellow;
     flex-grow: 1;
 }

@@ -1,0 +1,34 @@
+/* #lft{
+    flex-grow: 1;
+    width: 200px;
+    height: 10px;
+    background: black;
+} */
+#deadSpace{
+    flex-grow: 1;
+}
+h1{
+    font-size:xx-large;
+}
+#parentDiv{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    
+    /* flex-wrap: wrap; */
+}
+#cntbtn{
+    flex: 40%;
+    padding: 1%;
+}
+
+#image{
+    padding-top: 50px;
+    padding-left: 50px;
+    width: 65%;
+    padding-bottom: 50px;
+}
+#btn{
+    margin-top: 20px;}
+#parentDiv{
+    margin-top: 50px;
+}
