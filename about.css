@@ -74,3 +74,10 @@ width: 50px;
 #three{
     flex-grow: 1;
 }
+.btn{
+    border: 2px solid rgb(238, 163, 175);
+    color:rgb(238, 163, 175);;
+    font-size: small;
+    padding :5px;
+    border-radius: 30%;
+}

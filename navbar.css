@@ -1,12 +1,12 @@
 #navbarParent{
 display: flex;
-background: cyan;
+
 align-items: center;
 }
 #navItemsParent{
     display: flex;
     
-    background: greenyellow;
+    
     flex-grow: 1;
 }
 #logo{
@@ -15,15 +15,19 @@ align-items: center;
 #deadSpace{
     flex-grow: 1;
 }
+
 .navChild{
     flex-grow: 1;
+    color: black;
 }
-#CTA{
-    padding: 3px;
-}
-#CTAButton{
-    color: white;
-    background: black;
-    border-radius: 25%;
-    border: solid 2px red;
+@media screen and (max-width: 768px){
+      
+    .navChild{
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: left;
+        background: #222;
+        text-indent: 20px;
+    }
 }
