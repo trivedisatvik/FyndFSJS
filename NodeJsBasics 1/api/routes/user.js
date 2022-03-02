@@ -18,11 +18,13 @@ router.get("/",(req,res,next)=>{
         users:users
     })
 });
-// router.post("/Satvik",(req,res,next)=>{
-//     res.json({
-//         message:"This is coming from the /users/route when we use the POST HTTP"
-//     })
-// })
+router.post("/",(req,res,next)=>{
+    users.push(req.body);
+    res.json({
+        
+        message:"Successfully added",
+    })
+})
 
 
 module.exports = router;
