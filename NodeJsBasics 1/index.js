@@ -1,11 +1,9 @@
-// console.log("This is coming from Nodejs");
 var http = require("http");
-http.createServer(function (req,res) {
-    res.writeHead(200,{'Content-Type':'text/plain'});
-    res.write("This is coming from server");
-    res.end();
-    
-}).listen(4000);
 
+const app = require("./src/app.js");
 
-
+const PORT=4000;
+const server = http.createServer(app);
+server.listen(PORT,()=>{
+    console.log(`server running on port ${PORT}`);
+});
