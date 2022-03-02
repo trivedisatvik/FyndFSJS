@@ -20,6 +20,11 @@ router.get("/",(req,res,next)=>{
 });
 router.post("/",(req,res,next)=>{
     users.push(req.body);
+    const [,AnotherVariable] = users
+    const {name,id}=AnotherVariable;
+    console.log(name);
+    console.log(id);
+   
     res.json({
         
         message:"Successfully added",
