@@ -14,7 +14,7 @@ let users = [
 router.get("/",(req,res,next)=>{
     
     res.json({
-        heading:"This is the users data",
+        heading:"This is the users dat",
         users:users
     })
 });
