@@ -1,35 +1,10 @@
 const express = require("express")
 const router = express.Router();
+const {create_user,get_all_users} = require("../controllers/user.js");
 
-let users = [
-    {
-        name:"Satvik Trivedi",
-        id:1
-    },
-    {
-        name:"Vedansh",
-        id:2
-    }
-]
-router.get("/",(req,res,next)=>{
-    
-    res.json({
-        heading:"This is the users dat",
-        users:users
-    })
-});
-router.post("/",(req,res,next)=>{
-    users.push(req.body);
-    const [,AnotherVariable] = users
-    const {name,id}=AnotherVariable;
-    console.log(name);
-    console.log(id);
-   
-    res.json({
-        
-        message:"Successfully added",
-    })
-})
+
+router.get("/",get_all_users);
+router.post("/",create_user);
 
 
 module.exports = router;
