@@ -44,6 +44,18 @@ const create_user = (req,res,next)=>{
     })    
 };
 const get_all_users = (req,res,next)=>{
-    res.json(users);
+    User.find()
+    .exec()
+    .then((users)=>{
+        console.log(users)
+        res.status(200).json({
+            message:"Got all users successfully",
+            users
+        })
+    })
+    .catch(
+        err=>console.log(err)
+    )
+
 }
 module.exports = {create_user,get_all_users};
