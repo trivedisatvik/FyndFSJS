@@ -129,18 +129,18 @@ const delete_single_user = (req,res,next)=>{
 
 }
 const update_user=(req,res,next)=>{
-    let userId = req.params.userId
-    let updateOps={}
+    const userId = req.params.userId
+    const updateOps={}
 
-    for(var [key, value] of Object.entries(req.body)){
+    for(const [key, value] of Object.entries(req.body)){
         updateOps[key] = value
     }
-    console.log(updateOps);
+    
 
     User.update({_id:userId},{$set:updateOps})
     .exec()
     .then(successResult=>{
-        console.log(successResult);
+        
         res.status(200).json({
             message:"User Updated successfully"
         })
