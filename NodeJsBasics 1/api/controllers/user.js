@@ -75,7 +75,7 @@ const get_single_user=(req,res,next)=>{
 let userId=req.params.userId;
 
 
-let foundUser = User.find({
+User.find({
     _id:userId
 }).exec()
 .then(
