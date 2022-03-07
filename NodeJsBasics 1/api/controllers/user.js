@@ -1,5 +1,6 @@
 const User = require("../models/user.js");
 const mongoose = require("mongoose");
+const user = require("../models/user.js");
 
 const create_user = (req,res,next)=>{
     // users.push(req.body);
@@ -47,15 +48,59 @@ const get_all_users = (req,res,next)=>{
     User.find()
     .exec()
     .then((users)=>{
-        console.log(users)
-        res.status(200).json({
+        const responseObject={
+
+            count:users.length,
             message:"Got all users successfully",
-            users
-        })
+            users:users.map(user=>{
+                return{
+                    user,
+                    request:{
+                        type:"GET",
+                        url:`http://localhost:7000/users/${user._id}`,
+                    }
+                }
+            })
+
+        }
+        
+        res.status(200).json(responseObject)
     })
     .catch(
         err=>console.log(err)
     )
 
 }
-module.exports = {create_user,get_all_users};
+const get_single_user=(req,res,next)=>{
+let userId=req.params.userId;
+
+
+let foundUser = User.find({
+    _id:userId
+}).exec()
+.then(
+    user=>{
+        if(user.length>=1){
+        res.status(200).json({
+            message:"The api ran successfully",
+            userId,
+        })
+        console.log("this is the found user");
+        console.log(user);
+    }
+}
+
+)
+.catch(err=>{
+    res.status(500).json({
+        merror:"There has been an error",
+        error:err
+    })
+})
+
+
+
+
+
+}
+module.exports = {create_user,get_all_users,get_single_user};
