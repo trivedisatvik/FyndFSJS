@@ -1,6 +1,6 @@
 const User = require("../models/user.js");
 const mongoose = require("mongoose");
-const user = require("../models/user.js");
+
 
 const create_user = (req,res,next)=>{
     // users.push(req.body);
@@ -103,4 +103,61 @@ User.find({
 
 
 }
-module.exports = {create_user,get_all_users,get_single_user};
+const delete_single_user = (req,res,next)=>{
+    let userId = req.params.userId
+    User.remove({
+        _id:userId
+    })
+    .exec()
+    .then(
+        result=>(
+            res.status(200).json({
+                message:"User successfully removed"
+            })
+
+            
+
+        )
+    )
+    .catch(err=>{
+        res.status(500).json({
+            merror:"There has been an error",
+            error:err
+        })
+    })
+   
+
+}
+const update_user=(req,res,next)=>{
+    let userId = req.params.userId
+    let updateOps={}
+
+    for(var [key, value] of Object.entries(req.body)){
+        updateOps[key] = value
+    }
+    console.log(updateOps);
+
+    User.update({_id:userId},{$set:updateOps})
+    .exec()
+    .then(successResult=>{
+        console.log(successResult);
+        res.status(200).json({
+            message:"User Updated successfully"
+        })
+    })
+    .catch(err=>{
+        res.status(500).json({
+            merror:"There has been an error",
+            error:err
+        })
+    })
+
+
+
+    
+
+   
+
+
+}
+module.exports = {create_user,get_all_users,get_single_user,delete_single_user,update_user};
