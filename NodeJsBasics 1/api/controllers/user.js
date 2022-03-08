@@ -84,6 +84,8 @@ User.find({
         res.status(200).json({
             message:"The api ran successfully",
             userId,
+            user,
+
         })
         console.log("this is the found user");
         console.log(user);

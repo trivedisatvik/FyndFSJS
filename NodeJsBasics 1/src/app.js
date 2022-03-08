@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dbUrl = "mongodb+srv://trivedisatvik:Qazwsxedc12345@cluster0.dc296.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const orderRouter = require("../api/routes/order.js")
 
 mongoose.connect(dbUrl,{
     useNewUrlParser:true,
@@ -46,6 +46,7 @@ app.get("/",(req,res,next)=>{
     next();
 });
 app.use("/users",userRouter);
+app.use("/order",orderRouter);
 
 
 // app.get("/Satvik",(req,res,next)=>{
