@@ -1,5 +1,7 @@
 const User = require("../models/user.js");
 const mongoose = require("mongoose");
+const bcryptjs = require("bcryptjs");
+const jsonwebtoken = require("jsonwebtoken");
 
 
 const create_user = (req,res,next)=>{
@@ -15,28 +17,48 @@ const create_user = (req,res,next)=>{
         if(user.length>=1){
             return res.status(409).json({
                 message:"email already exist"
-            })
+            });
         }else{
-            const user = new User({
-                _id: new mongoose.Types.ObjectId(),
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                email: req.body.email,
-                password: req.body.password,
-                accessLevel: req.body.accessLevel,
-            })
-            user.save()
-            .then(result=>{
-                console.log("This is the result from saving");
-                console.log(result);
-                res.status(201).json({
-                    message:"User created",
-                    user:result
-                })
+            //creating a hash salting and hashing the incoming password
+            bcryptjs.hash(req.body.password,10,(err,hash)=>{
+                if(err){
+                    return res.status(500).json({
+                        error:err
+                    })
+                }
+                else{
+                    const user = new User({
+                        _id: new mongoose.Types.ObjectId(),
+                        first_name: req.body.first_name,
+                        last_name: req.body.last_name,
+                        email: req.body.email,
+                        password: hash,
+                        accessLevel: req.body.accessLevel,
+                    })
+                    user.save()
+                    .then(result=>{
+                        console.log("This is the result from saving");
+                        console.log(result);
+                        res.status(201).json({
+                            message:"User created",
+                            user:result
+                        })
+                    })
+        
+                }
             })
 
-        }
-    })
+
+                }
+            })
+
+
+
+
+
+
+
+           
     .catch(err=>{
         console.log(err);
         res.status(500).json({
@@ -162,4 +184,57 @@ const update_user=(req,res,next)=>{
 
 
 }
-module.exports = {create_user,get_all_users,get_single_user,delete_single_user,update_user};
+const user_login=(req,res,next)=>{
+    User.find({
+        email:req.body.email.toLowerCase()
+    })
+    .exec()
+    .then(user=>{
+        if(user.length<1){
+            return res.status(401).json({
+                message:"Auth failed"
+            })
+        }
+        bcryptjs.compare(req.body.password,user[0].password,(err,result)=>{
+            if(err){
+                res.status(401).json({
+                    message:"Auth failed"
+                })
+            }
+                if(result){
+                    //generate jwt token here
+
+                   const token = jsonwebtoken.sign(
+                        {
+                            email:user[0].email,
+                            accessLevel:user[0].accessLevel
+                        },
+                        "satvik",
+                        {
+                            expiresIn:"1h"
+                        }
+                    )
+
+
+
+
+
+
+
+
+                    return res.status(200).json({
+                        message:"Login Successfull",
+                        token
+                    })
+                }
+
+        })
+    })
+    .catch(err=>{
+        res.status(500).json({
+            merror:"There has been an error",
+            error:err
+        })
+    })
+}
+module.exports = {create_user,get_all_users,get_single_user,delete_single_user,update_user,user_login};
