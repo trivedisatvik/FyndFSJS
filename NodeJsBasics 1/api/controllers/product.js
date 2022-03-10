@@ -8,7 +8,7 @@ const product = new Product({
     productName : req.body.productName,
     productCategory : req.body.productCategory,
     productPrice:req.body.productPrice,
-    users:(req.body.users)
+    
 
 })
 product.save()
@@ -35,8 +35,6 @@ product.save()
 const get_all_products =(req,res,next)=>{
 
     Product.find()
-    .select("users productName")
-    .populate("users","first_name email")
     .exec()
     .then(result =>{
         console.log("This is the result from getting all Products");
@@ -48,7 +46,7 @@ const get_all_products =(req,res,next)=>{
                     _id:product.id,
                     productName:product.productName,
                     Price:product.productPrice,
-                    user:product.users
+                   
                 }
             })
         })

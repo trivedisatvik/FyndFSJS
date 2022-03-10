@@ -7,6 +7,8 @@ const orderSchema = mongoose.Schema({
     Address:{type:String,required:true},
    
     addedOn:{type:Number,required:true,default:new Date().getTime()},
+    products:[{type:mongoose.Schema.Types.ObjectId,ref:"Product"}],
+
 
 
 

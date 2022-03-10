@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const order = require("../models/order.js");
 const Order = require("../models/order.js");
 
 const create_single_order =(req,res,next)=>{
@@ -7,6 +8,7 @@ const order = new Order({
     OrderName : req.body.OrderName,
     UserName : req.body.UserName,
     Address: req.body.Address,
+    products:req.body.products
 
 })
 order.save()
@@ -33,13 +35,16 @@ order.save()
 const get_all_orders =(req,res,next)=>{
 
     Order.find()
+    .select("products OrderName")
+    .populate("products","productName productCategory productPrice")
     .exec()
     .then(result =>{
         console.log("This is the result from getting all Orders");
         console.log(result);
         res.status(201).json({
             message:"getting all Orders",
-            order:result
+            order:result,
+            product:order.products
         })
     })
     .catch(error=>{

@@ -7,7 +7,7 @@ const productSchema = mongoose.Schema({
     productPrice:{type:Number,required : true},
     productImage:[mongoose.Schema.Types.Mixed],
     addedOn:{type:Number,required:true,default:new Date().getTime()},
-    users:[{type:mongoose.Schema.Types.ObjectId,ref:"User"}]
+    
 
 
 

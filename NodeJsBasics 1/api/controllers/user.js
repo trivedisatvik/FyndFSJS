@@ -2,6 +2,7 @@ const User = require("../models/user.js");
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
+const orders = require("../models/order.js")
 
 
 const create_user = (req,res,next)=>{
@@ -34,6 +35,7 @@ const create_user = (req,res,next)=>{
                         email: req.body.email,
                         password: hash,
                         accessLevel: req.body.accessLevel,
+                        orders:req.body.orders
                     })
                     user.save()
                     .then(result=>{
@@ -68,6 +70,8 @@ const create_user = (req,res,next)=>{
 };
 const get_all_users = (req,res,next)=>{
     User.find()
+    .select("orders first_name")
+    .populate("orders","OrderName Address UserName")
     .exec()
     .then((users)=>{
         const responseObject={
@@ -80,7 +84,9 @@ const get_all_users = (req,res,next)=>{
                     request:{
                         type:"GET",
                         url:`http://localhost:7000/users/${user._id}`,
-                    }
+                    },
+                    order:user.order,
+                   
                 }
             })
 
